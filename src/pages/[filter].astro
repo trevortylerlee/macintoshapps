@@ -39,7 +39,7 @@ const filteredApps = allApps.filter((app) => {
     <ul
       class="grid list-none grid-cols-1 gap-x-3 gap-y-6 p-0 md:grid-cols-2 lg:gap-x-12 xl:grid-cols-3"
     >
-      {filteredApps.flatMap((app) => <AppCard app={app} />)}
+      {filteredApps.map((app) => <AppCard app={app} />)}
     </ul>
   </main>
 </BaseLayout>

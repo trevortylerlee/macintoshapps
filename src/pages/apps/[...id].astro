@@ -1,11 +1,11 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
+import { type CollectionEntry, getCollection, render } from "astro:content";
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import BackLink from "@/components/BackLink.astro";
-import Giscus from "@/components/Giscus.astro"
+import Giscus from "@/components/Giscus.astro";
 import SeoPost from "@/components/SeoPost.astro";
 import Tag from "@/components/Tag.astro";
 
@@ -16,13 +16,13 @@ interface Props {
 export async function getStaticPaths() {
   const apps = await getCollection("apps");
   return apps.map((app) => ({
-    params: { slug: app.slug },
+    params: { id: app.id },
     props: { app },
   }));
 }
 
 const { app } = Astro.props;
-const { Content } = await app.render();
+const { Content } = await render(app);
 ---
 
 <BaseLayout>
@@ -52,7 +52,7 @@ const { Content } = await app.render();
             href={app.data.link}
             class="hover:underline"
             target="_blank"
-            referrerpolicy="no-referrer">{app.data.title}</a
+            rel="noopener noreferrer">{app.data.title}</a
           >
           <Icon
             name="external-link"
@@ -72,20 +72,20 @@ const { Content } = await app.render();
       class="mx-auto mb-4 grid max-w-screen-md grid-cols-2 gap-3 py-6 sm:grid-cols-4 sm:py-12"
     >
 
-        {app.data.isOpenSource ? <Tag href={`/isOpenSource`}}>
-        <span class="text-green-500 text-base">●</span>
+        {app.data.isOpenSource ? <Tag href="/isOpenSource">
+        <span class="text-base text-green-500">●</span>
         Open Source
         </Tag> : null}
-        {app.data.isFree ? <Tag href={`/isFree`}}>
-        <span class="text-blue-500 text-base">■</span>
+        {app.data.isFree ? <Tag href="/isFree">
+        <span class="text-base text-blue-500">■</span>
         Free
         </Tag> : null}
-        {app.data.isOneTimePurchase ? <Tag href={`/isOneTimePurchase`}}>
-        <span class="text-yellow-500 text-base">▲</span>
-        One Time Purchase
+        {app.data.isOneTimePurchase ? <Tag href="/isOneTimePurchase">
+        <span class="text-base text-yellow-500">▲</span>
+        One-Time Purchase
         </Tag> : null}
-        {app.data.isSubscription ? <Tag href={`/isSubscription`}}>
-        <span class="text-red-500 text-base">✖</span>
+        {app.data.isSubscription ? <Tag href="/isSubscription">
+        <span class="text-base text-red-500">✖</span>
         Subscription
         </Tag> : null}
     </div>

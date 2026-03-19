@@ -2,18 +2,26 @@
 import { type CollectionEntry } from "astro:content";
 import { SITE } from "@/siteConfig";
 
-const { entry } = Astro.props;
-const post = entry as CollectionEntry<"apps">;
+interface Props {
+  entry: CollectionEntry<"apps"> | CollectionEntry<"blog">;
+}
 
-const postTitle = post.data.title || SITE.title;
-const postDescription = post.data.tagline || SITE.description;
+const { entry } = Astro.props;
+
+const postTitle = entry.data.title || SITE.title;
+const postDescription =
+  "tagline" in entry.data
+    ? entry.data.tagline
+    : "description" in entry.data
+      ? entry.data.description
+      : SITE.description;
 const ogImage = new URL("./og.jpg", Astro.site);
 ---
 
 <title>{`${postTitle} | ${SITE.title}`}</title>
 <meta name="title" content={`${postTitle} | ${SITE.title}`} />
 <meta name="description" content={postDescription} />
-<link rel="canonical" href={SITE.url} />
+<link rel="canonical" href={new URL(Astro.url.pathname, SITE.url)} />
 
 <meta property="og:title" content={postTitle} />
 <meta property="og:description" content={postDescription} />
@@ -29,8 +37,9 @@ const ogImage = new URL("./og.jpg", Astro.site);
 <meta name="twitter:card" content="summary_large_image" />
 
 {
-  post?.data.tags &&
-    post.data.tags.map((tag: string) => {
+  "tags" in entry.data &&
+    entry.data.tags &&
+    entry.data.tags.map((tag: string) => {
       return <meta property="article:tag" content={tag} />;
     })
 }

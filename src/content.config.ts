@@ -1,16 +1,15 @@
 import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
 
 const monetizationMethods = ["free", "freemium", "paid"] as const;
 
 const appsCollection = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/index.md", base: "./src/content/apps" }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
       tagline: z.string().max(40),
-      icon: image().refine((icon) => icon.width >= 256, {
-        message: "App icon should be at least 256px wide.",
-      }),
+      icon: image(),
       link: z.string(),
       developerName: z.string(),
       monetization: z.enum(monetizationMethods),
@@ -22,7 +21,7 @@ const appsCollection = defineCollection({
 });
 
 const blog = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/index.md", base: "./src/content/blog" }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),

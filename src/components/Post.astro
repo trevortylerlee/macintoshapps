@@ -1,11 +1,16 @@
 ---
+import { type CollectionEntry } from "astro:content";
 import { formatDate } from "@/lib/util";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
 
 const { post } = Astro.props;
 ---
 
 <li class="flex flex-col no-underline">
-  <a href={`/blog/${post.slug}`}>
+  <a href={`/blog/${post.id}`}>
     <span class="text-lg">{post.data.title}</span>
   </a>
   <div

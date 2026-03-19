@@ -1,4 +1,8 @@
 ---
+interface Props {
+  href: string;
+}
+
 const { href } = Astro.props;
 
 const normalizePath = (path: string) => path.replace(/\/+$/, "").toLowerCase();

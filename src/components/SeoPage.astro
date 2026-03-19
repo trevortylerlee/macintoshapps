@@ -14,7 +14,7 @@ const ogImageAlt = title;
 
 <title>{title}</title>
 <meta name="description" content={description} />
-<link rel="canonical" href={SITE.url} />
+<link rel="canonical" href={new URL(Astro.url.pathname, SITE.url)} />
 
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />

@@ -1,4 +1,10 @@
 ---
+import { type CollectionEntry } from "astro:content";
+
+interface Props {
+  app: CollectionEntry<"apps">;
+}
+
 const { app } = Astro.props;
 ---
 
