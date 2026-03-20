@@ -24,6 +24,7 @@
   }
 
   body {
+    overflow-x: clip;
     background-color: light-dark(
       rgb(var(--light-mode-background)),
       rgb(var(--dark-mode-background))

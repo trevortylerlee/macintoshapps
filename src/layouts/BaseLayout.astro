@@ -11,8 +11,8 @@ import Footer from "@/components/Footer.astro";
     <slot name="head" />
   </BaseHead>
   <body>
+    <Navigation />
     <div class="mx-auto min-h-screen max-w-screen-2xl p-3 font-sans sm:p-6">
-      <Navigation />
       <slot />
       <Footer />
     </div>

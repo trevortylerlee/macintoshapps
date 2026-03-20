@@ -1,0 +1,223 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+
+const apps = await getCollection("apps");
+
+// 19-column CSS grid layout inspired by Apple's App Store hero.
+// Each column: [iconsInColumn, verticalOffsetRatio].
+// Offsets are ratios of the icon size so they scale with responsive sizing.
+// Symmetric: columns 1–9 mirror columns 19–11, column 10 is center.
+const columnDefs: [number, number][] = [
+  [1, 0], // col 1
+  [2, -0.656], // col 2
+  [2, 0], // col 3
+  [2, 0.531], // col 4
+  [3, -0.156], // col 5
+  [3, 0.229], // col 6
+  [4, -0.271], // col 7
+  [4, 0.125], // col 8
+  [5, -0.385], // col 9
+  [4, 0], // col 10 (center)
+  [5, -0.385], // col 11
+  [4, 0.125], // col 12
+  [4, -0.271], // col 13
+  [3, 0.229], // col 14
+  [3, -0.156], // col 15
+  [2, 0.531], // col 16
+  [2, 0], // col 17
+  [2, -0.656], // col 18
+  [1, 0], // col 19
+];
+
+// Total icons needed: 56. Cycle through the 30 available apps.
+const totalNeeded = columnDefs.reduce((sum, [count]) => sum + count, 0);
+const iconPool: typeof apps = [];
+while (iconPool.length < totalNeeded) {
+  iconPool.push(...apps);
+}
+
+let iconIdx = 0;
+const columns = columnDefs.map(([count, offsetRatio], colIdx) => {
+  const colApps = iconPool.slice(iconIdx, iconIdx + count);
+  iconIdx += count;
+  return { apps: colApps, offsetRatio, colIdx };
+});
+---
+
+{() => {
+  let globalIdx = 0;
+  return (
+    <div class="chiclets">
+      {columns.map((col) =>
+        col.apps.map((app, rowIdx) => {
+          const i = globalIdx++;
+          return (
+            <a
+              href={`/apps/${app.id}`}
+              class="chiclet"
+              style={`--row: ${rowIdx + 1}; --col: ${col.colIdx + 1}; --offset-ratio: ${col.offsetRatio}; --i: ${i};`}
+              aria-label={app.data.title}
+              tabindex={-1}
+            >
+              <Image
+                src={app.data.icon}
+                width={192}
+                height={192}
+                quality="low"
+                format="webp"
+                alt=""
+                loading="eager"
+                class="chiclet-img"
+              />
+            </a>
+          );
+        }),
+      )}
+    </div>
+  );
+}}
+
+<style>
+  .chiclets {
+    --chiclet-size: clamp(56px, 6.6vw, 96px);
+    --chiclet-gap: clamp(12px, 1.5vw, 22px);
+
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: grid;
+    gap: var(--chiclet-gap);
+    grid-template-rows: repeat(5, var(--chiclet-size));
+    grid-template-columns: repeat(19, var(--chiclet-size));
+    justify-content: center;
+    overflow: hidden;
+
+    mask-image:
+      linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 3%,
+        black 97%,
+        transparent 100%
+      ),
+      linear-gradient(
+        to right,
+        transparent 0%,
+        black 6%,
+        black 94%,
+        transparent 100%
+      );
+    mask-composite: intersect;
+    -webkit-mask-image:
+      linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 3%,
+        black 97%,
+        transparent 100%
+      ),
+      linear-gradient(
+        to right,
+        transparent 0%,
+        black 6%,
+        black 94%,
+        transparent 100%
+      );
+    -webkit-mask-composite: source-in;
+  }
+
+  .chiclet {
+    grid-row: var(--row);
+    grid-column: var(--col);
+    margin-top: calc(var(--offset-ratio) * var(--chiclet-size));
+    width: var(--chiclet-size);
+    height: var(--chiclet-size);
+    display: block;
+    opacity: 0;
+    scale: 0.7;
+    animation: chiclet-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation-delay: calc(var(--i) * 30ms);
+    transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    will-change: transform;
+    outline: none;
+  }
+
+  .chiclet:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+    border-radius: 20%;
+  }
+
+  @keyframes chiclet-in {
+    0% {
+      opacity: 0;
+      scale: 0.7;
+    }
+    100% {
+      opacity: 1;
+      scale: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chiclet {
+      animation: none;
+      opacity: 1;
+      scale: 1;
+      transition: none;
+    }
+  }
+
+  .chiclet-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 20%;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+  const container = document.querySelector<HTMLElement>(".chiclets");
+  if (container) {
+    const chiclets = container.querySelectorAll<HTMLElement>(".chiclet");
+
+    // Shuffle icon content across grid positions on every page load.
+    const items = Array.from(chiclets).map((el) => ({
+      href: el.getAttribute("href")!,
+      label: el.getAttribute("aria-label")!,
+      html: el.innerHTML,
+    }));
+    for (let i = items.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [items[i], items[j]] = [items[j], items[i]];
+    }
+    chiclets.forEach((el, idx) => {
+      el.setAttribute("href", items[idx].href);
+      el.setAttribute("aria-label", items[idx].label);
+      el.innerHTML = items[idx].html;
+    });
+
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (!prefersReduced) {
+      for (const el of chiclets) {
+        el.addEventListener("mousemove", (e) => {
+          const rect = el.getBoundingClientRect();
+          const dx = e.clientX - (rect.left + rect.width / 2);
+          const intensity = Math.min(Math.abs(dx) / (rect.width / 2), 1);
+          const angle = (dx > 0 ? 1 : -1) * (3 + 4 * intensity);
+          el.style.transform = `scale(1.08) rotate(${angle}deg)`;
+        });
+
+        el.addEventListener("mouseleave", () => {
+          el.style.transform = "";
+        });
+      }
+    }
+  }
+</script>
