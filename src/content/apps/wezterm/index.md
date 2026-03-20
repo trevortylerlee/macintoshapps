@@ -9,6 +9,7 @@ isOpenSource: true
 isFree: true
 isOneTimePurchase: false
 isSubscription: false
+tags: ["terminal"]
 ---
 
 > A GPU-accelerated cross-platform terminal emulator and multiplexer implemented in Rust.

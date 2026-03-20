@@ -9,6 +9,7 @@ isOpenSource: true
 isFree: true
 isOneTimePurchase: false
 isSubscription: false
+tags: ["terminal"]
 ---
 
 > Ghostty is a fast, feature-rich, and cross-platform terminal emulator that uses platform-native UI and GPU acceleration.

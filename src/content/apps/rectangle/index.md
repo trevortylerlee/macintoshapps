@@ -9,6 +9,7 @@ isOpenSource: true
 isFree: true
 isOneTimePurchase: false
 isSubscription: false
+tags: ["window management"]
 ---
 
 > Move and resize windows in macOS using keyboard shortcuts or snap areas.

@@ -9,6 +9,7 @@ isOpenSource: false
 isFree: true
 isOneTimePurchase: false
 isSubscription: false
+tags: ["finder utility"]
 ---
 
 > Cut and paste files and folders in Finder using Command+X and Command+V.

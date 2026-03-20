@@ -9,6 +9,7 @@ isOpenSource: true
 isFree: true
 isOneTimePurchase: false
 isSubscription: false
+tags: ["file sharing"]
 ---
 
 > The qBittorrent project aims to provide an open source software alternative to µTorrent.

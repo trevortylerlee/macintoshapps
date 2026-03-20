@@ -9,6 +9,7 @@ isOpenSource: true
 isFree: true
 isOneTimePurchase: false
 isSubscription: false
+tags: ["image utility"]
 ---
 
 > Saves disk space & bandwidth by compressing images without losing quality.

@@ -9,6 +9,7 @@ isOpenSource: true
 isFree: true
 isOneTimePurchase: false
 isSubscription: false
+tags: ["terminal"]
 ---
 
 > iTerm2 brings the terminal into the modern age with features you never knew you always wanted.

@@ -9,6 +9,7 @@ isOpenSource: true
 isFree: true
 isOneTimePurchase: false
 isSubscription: false
+tags: ["firewall"]
 ---
 
 > Block unknown outgoing connections, protecting your privacy and your Mac!

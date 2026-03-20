@@ -1,0 +1,49 @@
+---
+import { getCollection } from "astro:content";
+
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+import AppCard from "@/components/AppCard.astro";
+import SeoPage from "@/components/SeoPage.astro";
+
+interface Props {
+  tag: string;
+}
+
+export async function getStaticPaths() {
+  const apps = await getCollection("apps");
+  const tagSet = new Set<string>();
+  for (const app of apps) {
+    for (const tag of app.data.tags ?? []) {
+      tagSet.add(tag);
+    }
+  }
+
+  return [...tagSet].map((tag) => ({
+    params: { tag },
+    props: { tag },
+  }));
+}
+
+const { tag } = Astro.props;
+
+const allApps = await getCollection("apps");
+const filteredApps = allApps.filter((app) =>
+  (app.data.tags ?? []).includes(tag),
+);
+---
+
+<BaseLayout>
+  <SeoPage slot="head" title={tag} />
+  <main>
+    <h1 class="pt-12 text-2xl font-semibold sm:text-4xl">Apps tagged with {tag}</h1>
+    <p class="mt-2 text-lightModeForegroundMuted dark:text-darkModeForegroundMuted">
+      {filteredApps.length} {filteredApps.length === 1 ? "app" : "apps"}
+    </p>
+    <ul
+      class="mt-8 grid list-none grid-cols-1 gap-x-3 gap-y-6 p-0 md:grid-cols-2 lg:gap-x-12 xl:grid-cols-3"
+    >
+      {filteredApps.map((app) => <AppCard app={app} />)}
+    </ul>
+  </main>
+</BaseLayout>

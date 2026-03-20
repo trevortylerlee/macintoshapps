@@ -17,6 +17,7 @@ const appsCollection = defineCollection({
       isFree: z.boolean(),
       isOneTimePurchase: z.boolean(),
       isSubscription: z.boolean(),
+      tags: z.array(z.string()).optional(),
     }),
 });
 

@@ -9,4 +9,5 @@ isOpenSource: true
 isFree: true
 isOneTimePurchase: false
 isSubscription: false
+tags: ["window management"]
 ---

@@ -9,6 +9,7 @@ isOpenSource: true
 isFree: true
 isOneTimePurchase: false
 isSubscription: false
+tags: ["disk utility"]
 ---
 
 > Small utility application for macOS that graphically shows the disk usage within a file system.

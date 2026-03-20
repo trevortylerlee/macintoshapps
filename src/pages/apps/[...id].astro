@@ -4,8 +4,7 @@ import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import BackLink from "@/components/BackLink.astro";
-import Giscus from "@/components/Giscus.astro";
+import RelatedApps from "@/components/RelatedApps.astro";
 import SeoPost from "@/components/SeoPost.astro";
 import Tag from "@/components/Tag.astro";
 
@@ -23,15 +22,13 @@ export async function getStaticPaths() {
 
 const { app } = Astro.props;
 const { Content } = await render(app);
+const tags = app.data.tags ?? [];
 ---
 
 <BaseLayout>
   <SeoPost slot="head" entry={app} />
   <div>
-    <div class="mx-auto max-w-[80ch] pt-12">
-      <BackLink />
-    </div>
-    <div class="mx-auto flex max-w-[80ch] items-center gap-2 pt-12 sm:pt-16">
+    <div class="flex items-center gap-4 pt-12 sm:pt-16">
       <Image
         src={app.data.icon}
         width={100}
@@ -56,11 +53,11 @@ const { Content } = await render(app);
           >
           <Icon
             name="external-link"
-            class="size-4 text-lightModeForegroundMuted sm:size-6 dark:text-darkModeForegroundMuted"
+            class="text-lightModeForegroundMuted dark:text-darkModeForegroundMuted size-4 sm:size-6"
           />
         </h1>
         <p
-          class="text-lightModeForegroundMuted sm:text-base dark:text-darkModeForegroundMuted"
+          class="text-lightModeForegroundMuted dark:text-darkModeForegroundMuted sm:text-base"
           transition:name={`${app.data.title}-mutedText`}
         >
           {app.data.developerName}
@@ -68,33 +65,62 @@ const { Content } = await render(app);
       </div>
     </div>
 
-    <div
-      class="mx-auto mb-4 grid max-w-screen-md grid-cols-2 gap-3 py-6 sm:grid-cols-4 sm:py-12"
-    >
-
-        {app.data.isOpenSource ? <Tag href="/isOpenSource">
-        <span class="text-base text-green-500">●</span>
-        Open Source
-        </Tag> : null}
-        {app.data.isFree ? <Tag href="/isFree">
-        <span class="text-base text-blue-500">■</span>
-        Free
-        </Tag> : null}
-        {app.data.isOneTimePurchase ? <Tag href="/isOneTimePurchase">
-        <span class="text-base text-yellow-500">▲</span>
-        One-Time Purchase
-        </Tag> : null}
-        {app.data.isSubscription ? <Tag href="/isSubscription">
-        <span class="text-base text-red-500">✖</span>
-        Subscription
-        </Tag> : null}
+    <div class="flex flex-wrap items-center gap-2 pt-6">
+      {
+        app.data.isOpenSource ? (
+          <Tag href="/isOpenSource">
+            <span class="text-base text-green-500">●</span>
+            Open Source
+          </Tag>
+        ) : null
+      }
+      {
+        app.data.isFree ? (
+          <Tag href="/isFree">
+            <span class="text-base text-blue-500">■</span>
+            Free
+          </Tag>
+        ) : null
+      }
+      {
+        app.data.isOneTimePurchase ? (
+          <Tag href="/isOneTimePurchase">
+            <span class="text-base text-yellow-500">▲</span>
+            One-Time Purchase
+          </Tag>
+        ) : null
+      }
+      {
+        app.data.isSubscription ? (
+          <Tag href="/isSubscription">
+            <span class="text-base text-red-500">✖</span>
+            Subscription
+          </Tag>
+        ) : null
+      }
+      {
+        tags.map((tag) => (
+          <Tag href={`/tags/${tag}`}>
+            {tag}
+          </Tag>
+        ))
+      }
     </div>
 
-    <div
-      class="content prose prose-lg prose-neutral mx-auto sm:prose-xl dark:prose-invert"
-    >
-      <Content />
+    <div class="py-4 sm:py-6"></div>
+
+    <hr class="mb-8 opacity-25" />
+
+    <div class="flex flex-col gap-12 lg:flex-row">
+      <div class="min-w-0 flex-1">
+        <div class="content prose dark:prose-invert">
+          <Content />
+        </div>
+      </div>
+
+      <div class="w-full shrink-0 lg:w-96">
+        <RelatedApps app={app} />
+      </div>
     </div>
-    <Giscus />
   </div>
 </BaseLayout>

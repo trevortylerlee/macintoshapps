@@ -9,6 +9,7 @@ isOpenSource: false
 isFree: false
 isOneTimePurchase: false
 isSubscription: true
+tags: ["notes"]
 ---
 
 > Craft is a note-taking app, word processor, to-do list, and personal organizer. It helps you get your ideas and life in order. And it keeps your documents looking sharp and never more than a few keystrokes away.

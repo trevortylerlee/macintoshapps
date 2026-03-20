@@ -9,6 +9,7 @@ isOpenSource: false
 isFree: false
 isOneTimePurchase: true
 isSubscription: false
+tags: ["automation", "keyboard utility"]
 ---
 
 > A great, feature packed app that allows you to customize various input devices on your Mac.
@@ -22,8 +23,7 @@ My favorite shortcut that I've set up is pressing <kbd>⌥ Space</kbd> triggers 
 BTT has a free 45 day trial. There are two licenses you can purchase. The standard license costs $12 and comes with 2 years of free updates. The lifetime license is $24.
 
 ### Key Features:
+
 - Supports custom gestures and shortcuts for trackpads, mice, and keyboards.
 - Allows app-specific configurations to optimize workflow.
 - Highly customizable interface with support for macros and scripting.
-
----

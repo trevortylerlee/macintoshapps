@@ -1,0 +1,34 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+
+import AppCard from "@/components/AppCard.astro";
+
+interface Props {
+  app: CollectionEntry<"apps">;
+}
+
+const { app } = Astro.props;
+const currentTags = app.data.tags ?? [];
+
+const allApps = await getCollection("apps");
+const relatedApps = currentTags.length > 0
+  ? allApps.filter(
+      (other) =>
+        other.id !== app.id &&
+        (other.data.tags ?? []).some((tag) => currentTags.includes(tag)),
+    )
+  : [];
+---
+
+{
+  relatedApps.length > 0 && (
+    <aside>
+      <h2 class="mb-4 text-sm font-semibold uppercase tracking-wide text-lightModeForegroundMuted dark:text-darkModeForegroundMuted">
+        Related Apps
+      </h2>
+      <ul class="grid list-none gap-y-6 p-0">
+        {relatedApps.map((related) => <AppCard app={related} />)}
+      </ul>
+    </aside>
+  )
+}

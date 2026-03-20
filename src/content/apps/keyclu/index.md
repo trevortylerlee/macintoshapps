@@ -9,6 +9,7 @@ isOpenSource: true
 isFree: true
 isOneTimePurchase: false
 isSubscription: false
+tags: ["keyboard utility"]
 ---
 
 > Simple and handy overview of applications shortcuts. Easy to use: just press <kbd>⌘</kbd> twice and hold to see the list.

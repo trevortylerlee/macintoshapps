@@ -9,6 +9,7 @@ isOpenSource: false
 isFree: false
 isOneTimePurchase: false
 isSubscription: true
+tags: ["developer tools"]
 ---
 
 > OrbStack is the fast, light, and easy way to run Docker containers and Linux machines. It's a supercharged WSL and Docker Desktop alternative, all in one easy-to-use app.

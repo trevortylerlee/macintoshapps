@@ -9,6 +9,7 @@ isOpenSource: true
 isFree: true
 isOneTimePurchase: false
 isSubscription: false
+tags: ["keyboard utility"]
 ---
 
 > KeyCastr enables you to share your keystrokes when creating screencasts, presenting, or collaborating with others. You can display command keys, modifier keys, all keystrokes, and mouse clicks.

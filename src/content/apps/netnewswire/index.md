@@ -9,6 +9,7 @@ isOpenSource: true
 isFree: true
 isOneTimePurchase: false
 isSubscription: false
+tags: ["rss reader"]
 ---
 
 > NetNewsWire shows you articles from your favorite blogs and news sites and keeps track of what you’ve read.
