@@ -1,7 +1,7 @@
 ---
 title: Abendrot
 tagline: Screen warmer for your circadian rhythm.
-icon: ./icon.png
+icon: ./icon.svg
 link: https://abendrot.app
 developerName: Matthew Ball
 monetization: free
