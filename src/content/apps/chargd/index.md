@@ -1,7 +1,7 @@
 ---
 title: Chargd
 tagline: Native Mac invoicing. Buy once, work offline.
-icon: ./icon.png
+icon: ./chargd-icon.png
 link: https://chargd.pro/
 developerName: Mohammad Ehtesham
 monetization: paid
