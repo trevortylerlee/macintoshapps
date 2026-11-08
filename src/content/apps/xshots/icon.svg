@@ -1,0 +1,64 @@
+<svg width="256" height="256" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title description">
+  <title id="title">XShots app icon</title>
+  <description id="description">Two overlapping blue and coral screenshot cards</description>
+  <defs>
+    <linearGradient id="blue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a9af5" />
+      <stop offset="0.5" stop-color="#0d7ee6" />
+      <stop offset="1" stop-color="#0460cc" />
+    </linearGradient>
+    <linearGradient id="coral" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff8a65" />
+      <stop offset="0.5" stop-color="#f06040" />
+      <stop offset="1" stop-color="#d4432e" />
+    </linearGradient>
+    <linearGradient id="blue-inner" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8f4fe" />
+      <stop offset="1" stop-color="#c8e2f8" />
+    </linearGradient>
+    <linearGradient id="coral-inner" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff3ee" />
+      <stop offset="1" stop-color="#fde0d4" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-5%" width="120%" height="115%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#0a2846" flood-opacity="0.18" />
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" fill="#fff" />
+  <g transform="rotate(-3 300 522)" filter="url(#shadow)">
+    <rect x="102" y="170" width="396" height="704" rx="53" fill="url(#blue)" />
+    <rect
+      x="105"
+      y="173"
+      width="390"
+      height="698"
+      rx="50"
+      fill="none"
+      stroke="#fff"
+      stroke-opacity="0.27"
+      stroke-width="3"
+    />
+    <rect x="175" y="249" width="250" height="26" rx="13" fill="#fff" opacity="0.86" />
+    <rect x="197" y="291" width="206" height="18" rx="9" fill="#fff" opacity="0.47" />
+    <rect x="155" y="353" width="290" height="451" rx="40" fill="#fff" opacity="0.9" />
+    <rect x="160" y="358" width="280" height="440" rx="36" fill="url(#blue-inner)" />
+  </g>
+  <g transform="rotate(3 724 522)" filter="url(#shadow)">
+    <rect x="526" y="170" width="396" height="704" rx="53" fill="url(#coral)" />
+    <rect
+      x="529"
+      y="173"
+      width="390"
+      height="698"
+      rx="50"
+      fill="none"
+      stroke="#fff"
+      stroke-opacity="0.27"
+      stroke-width="3"
+    />
+    <rect x="599" y="249" width="250" height="26" rx="13" fill="#fff" opacity="0.86" />
+    <rect x="621" y="291" width="206" height="18" rx="9" fill="#fff" opacity="0.47" />
+    <rect x="579" y="353" width="290" height="451" rx="40" fill="#fff" opacity="0.9" />
+    <rect x="584" y="358" width="280" height="440" rx="36" fill="url(#coral-inner)" />
+  </g>
+</svg>
