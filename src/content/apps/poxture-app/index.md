@@ -4,7 +4,7 @@ tagline: A glow when you slouch or lean in.
 icon: ./icon.png
 link: https://poxture.com
 developerName: Shyam Verma
-monetization: paid
+monetization: freemium
 isOpenSource: false
 isFree: false
 isOneTimePurchase: true
